@@ -1,6 +1,6 @@
 // src/App.tsx
 import React from "react";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import TitlePage from "./pages/TitlePage";
 import DiagnosticsPage from "./pages/DiagnosticsPage";
 import ScenariosPage from "./pages/ScenariosPage";
@@ -18,7 +18,7 @@ import DigitalizationPage from "./pages/DigitalizationPage";
 
 const App: React.FC = () => {
   return (
-    <HashRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<TitlePage />} />
         <Route path="/diagnostics" element={<DiagnosticsPage />} />
@@ -35,7 +35,7 @@ const App: React.FC = () => {
         <Route path="/culture" element={<CulturePage />} />
         <Route path="/digitalization" element={<DigitalizationPage />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 

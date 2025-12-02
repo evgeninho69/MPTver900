@@ -335,7 +335,7 @@ export const StructureSection: React.FC = () => {
                           video.currentTime = 0;
                         }}
                       >
-                        <source src="/video/mobile-card.mp4" type="video/mp4" />
+                        <source src={`${import.meta.env.BASE_URL}video/mobile-card.mp4`} type="video/mp4" />
                       </video>
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/30 group-hover/card:from-black/70 group-hover/card:via-black/30 group-hover/card:to-transparent transition-all duration-700 pointer-events-none" />
                     </div>

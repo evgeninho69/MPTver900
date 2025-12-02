@@ -69,7 +69,7 @@ export const HeroSection: React.FC = () => {
             console.error("Ошибка загрузки видео:", e);
           }}
         >
-          <source src="/video/hero-background.mp4" type="video/mp4" />
+          <source src={`${import.meta.env.BASE_URL}video/hero-background.mp4`} type="video/mp4" />
         </video>
         {/* Легкое затемнение для лучшей читаемости текста */}
         <div className="absolute inset-0 bg-black/20" />
