@@ -494,10 +494,10 @@ export const IndustryPage: React.FC = () => {
               </div>
 
               <div className="grid md:grid-cols-3 gap-4">
-                {industrialZones.map((zone, index) => (
+                {industrialZones.map((zone) => (
                   <Card key={zone.name} className="bg-white/80 border-heritage/30">
                     <div className="p-4">
-                      <Heading as="h4" className="text-lg mb-2 text-heritage">{zone.name}</Heading>
+                      <Heading as="h3" className="text-lg mb-2 text-heritage">{zone.name}</Heading>
                       <Body className="text-xs text-slate-600 mb-1">
                         <strong>Статус:</strong> {zone.status}
                       </Body>

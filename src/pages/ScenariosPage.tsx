@@ -224,12 +224,12 @@ export const ScenariosPage: React.FC = () => {
           {/* Карточки сценариев */}
           <div className="grid md:grid-cols-3 gap-6 mb-12">
             {scenarios.map((scenario, index) => {
-              const colorClasses = {
+              const colorClasses: Record<string, string> = {
                 heritage: "bg-gradient-to-br from-heritage/10 to-heritage/5 border-heritage/30",
                 water: "bg-gradient-to-br from-water/10 to-water/5 border-water/30",
                 digital: "bg-gradient-to-br from-digital/10 to-digital/5 border-digital/30",
               };
-              const bgColorClasses = {
+              const bgColorClasses: Record<string, string> = {
                 heritage: "bg-heritage",
                 water: "bg-water",
                 digital: "bg-digital",
@@ -244,9 +244,9 @@ export const ScenariosPage: React.FC = () => {
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -8 }}
                 >
-                  <Card className={`${colorClasses[scenario.color]} h-full`}>
+                  <Card className={`${colorClasses[scenario.color] || ""} h-full`}>
                     <div className="flex items-center gap-3 mb-4">
-                      <div className={`w-12 h-12 rounded-full ${bgColorClasses[scenario.color]} flex items-center justify-center text-white font-bold text-xl`}>
+                      <div className={`w-12 h-12 rounded-full ${bgColorClasses[scenario.color] || ""} flex items-center justify-center text-white font-bold text-xl`}>
                         {index + 1}
                       </div>
                       <div>

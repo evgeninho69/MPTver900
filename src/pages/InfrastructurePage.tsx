@@ -423,7 +423,7 @@ export const InfrastructurePage: React.FC = () => {
                         <div className="space-y-6">
                           {system.measures.map((measure, measureIndex) => (
                             <div key={measureIndex}>
-                              <Heading as="h4" className={`text-lg mb-3 ${textColorClass}`}>
+                              <Heading as="h3" className={`text-lg mb-3 ${textColorClass}`}>
                                 {measure.category}
                               </Heading>
                               <ul className="space-y-2">

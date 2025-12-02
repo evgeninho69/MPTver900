@@ -1,7 +1,6 @@
 // src/components/ai/AIAgent.tsx
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Button } from "../ui/Button";
 
 interface Message {
   id: string;

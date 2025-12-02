@@ -567,7 +567,7 @@ export const CulturePage: React.FC = () => {
                         className="w-full h-48 object-cover rounded-lg mb-4"
                         loading="lazy"
                       />
-                      <Heading as="h4" className="text-xl mb-2 text-digital">{brand.name}</Heading>
+                      <Heading as="h3" className="text-xl mb-2 text-digital">{brand.name}</Heading>
                       <Body className="text-slate-700 mb-2">{brand.description}</Body>
                       <Body className="text-sm text-slate-600">
                         <strong>Символ:</strong> {brand.symbol}

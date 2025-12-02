@@ -1,5 +1,5 @@
 // src/components/sections/NewsSection.tsx
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { PageSection } from "../layout/PageSection";
 import { Heading, Body, Caption } from "../ui/Typography";
@@ -41,13 +41,10 @@ const mockNews: NewsItem[] = [
 ];
 
 export const NewsSection: React.FC = () => {
-  const [news, setNews] = useState<NewsItem[]>(mockNews);
-  const [isLoading, setIsLoading] = useState(false);
-
   // TODO: Реализовать загрузку новостей из Telegram API
-  useEffect(() => {
-    // fetchNewsFromTelegram();
-  }, []);
+  // useEffect(() => {
+  //   fetchNewsFromTelegram();
+  // }, []);
 
   return (
     <PageSection id="news" className="bg-white">
@@ -69,7 +66,7 @@ export const NewsSection: React.FC = () => {
         </Body>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {news.map((item, index) => (
+          {mockNews.map((item, index) => (
             <motion.div
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
