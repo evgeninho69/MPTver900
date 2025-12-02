@@ -370,19 +370,19 @@ export const ScenariosPage: React.FC = () => {
             </Body>
             <div className="grid md:grid-cols-3 gap-4">
               <Card className="bg-white/80">
-                <Heading as="h4" className="text-lg mb-2">1. Прорывной эффект</Heading>
+                <Heading as="h3" className="text-lg mb-2">1. Прорывной эффект</Heading>
                 <Body className="text-sm text-slate-700">
                   Резкое снижение износа коммунальных сетей с 84,1% до 20% к 2035 году требует агрессивной модернизации
                 </Body>
               </Card>
               <Card className="bg-white/80">
-                <Heading as="h4" className="text-lg mb-2">2. Быстрые победы</Heading>
+                <Heading as="h3" className="text-lg mb-2">2. Быстрые победы</Heading>
                 <Body className="text-sm text-slate-700">
                   Пешеходизация Старого Волжского моста, редизайн Бульвара Радищева, пилотные участки набережных
                 </Body>
               </Card>
               <Card className="bg-white/80">
-                <Heading as="h4" className="text-lg mb-2">3. Гибкость</Heading>
+                <Heading as="h3" className="text-lg mb-2">3. Гибкость</Heading>
                 <Body className="text-sm text-slate-700">
                   Защита критически важных приоритетов даже при ограниченном финансировании, готовность к ускорению
                 </Body>
@@ -442,7 +442,7 @@ export const ScenariosPage: React.FC = () => {
                   className="w-full h-[300px] object-cover"
                 />
                 <div className="bg-white p-6">
-                  <Heading as="h4" className="mb-2">Водно-зелёный каркас</Heading>
+                  <Heading as="h3" className="mb-2">Водно-зелёный каркас</Heading>
                   <Body className="text-sm text-slate-600">
                     Создание единого непрерывного каркаса зеленых насаждений общего пользования
                   </Body>
@@ -455,7 +455,7 @@ export const ScenariosPage: React.FC = () => {
                   className="w-full h-[300px] object-cover"
                 />
                 <div className="bg-white p-6">
-                  <Heading as="h4" className="mb-2">Реабилитация рек</Heading>
+                  <Heading as="h3" className="mb-2">Реабилитация рек</Heading>
                   <Body className="text-sm text-slate-600">
                     Регулирование стока и дноуглубление русел малых рек Тьмаки и Лазури
                   </Body>
@@ -465,19 +465,19 @@ export const ScenariosPage: React.FC = () => {
 
             <div className="grid md:grid-cols-3 gap-6">
               <Card>
-                <Heading as="h4" className="mb-3 text-lg">Рекультивация</Heading>
+                <Heading as="h3" className="mb-3 text-lg">Рекультивация</Heading>
                 <Body className="text-sm text-slate-700">
                   Рекультивация нарушенных ландшафтов для повышения экологической устойчивости
                 </Body>
               </Card>
               <Card>
-                <Heading as="h4" className="mb-3 text-lg">Акустический комфорт</Heading>
+                <Heading as="h3" className="mb-3 text-lg">Акустический комфорт</Heading>
                 <Body className="text-sm text-slate-700">
                   Ликвидация зон акустического дискомфорта от аэродрома «Мигалово»
                 </Body>
               </Card>
               <Card>
-                <Heading as="h4" className="mb-3 text-lg">Вынос производств</Heading>
+                <Heading as="h3" className="mb-3 text-lg">Вынос производств</Heading>
                 <Body className="text-sm text-slate-700">
                   Вынос экологически опасных производств из жилой застройки и прибрежных зон
                 </Body>
@@ -543,7 +543,7 @@ export const ScenariosPage: React.FC = () => {
             
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <Card>
-                <Heading as="h4" className="mb-4 text-lg">Обход транзита</Heading>
+                <Heading as="h3" className="mb-4 text-lg">Обход транзита</Heading>
                 <ul className="space-y-2 text-slate-700">
                   <li className="flex items-start gap-2">
                     <span className="text-digital mt-1">•</span>
@@ -556,7 +556,7 @@ export const ScenariosPage: React.FC = () => {
                 </ul>
               </Card>
               <Card>
-                <Heading as="h4" className="mb-4 text-lg">Усиление связности</Heading>
+                <Heading as="h3" className="mb-4 text-lg">Усиление связности</Heading>
                 <ul className="space-y-2 text-slate-700">
                   <li className="flex items-start gap-2">
                     <span className="text-water mt-1">•</span>
@@ -579,7 +579,7 @@ export const ScenariosPage: React.FC = () => {
                   className="w-full h-[300px] object-cover"
                 />
                 <div className="bg-white p-6">
-                  <Heading as="h4" className="mb-2">Полицентрическое развитие</Heading>
+                  <Heading as="h3" className="mb-2">Полицентрическое развитие</Heading>
                   <Body className="text-sm text-slate-600">
                     Создание новых центров активности: «Тверь-Экспо» в Заволжье, «Тверь-Сити» в Южном районе
                   </Body>
@@ -592,7 +592,7 @@ export const ScenariosPage: React.FC = () => {
                   className="w-full h-[300px] object-cover"
                 />
                 <div className="bg-white p-6">
-                  <Heading as="h4" className="mb-2">Мультимодальность</Heading>
+                  <Heading as="h3" className="mb-2">Мультимодальность</Heading>
                   <Body className="text-sm text-slate-600">
                     ТПУ «Тверь-Центр» и будущая станция ВСМ «Новая Тверь» обеспечат свободное использование нескольких видов транспорта
                   </Body>
@@ -624,19 +624,19 @@ export const ScenariosPage: React.FC = () => {
             </Body>
             <div className="grid md:grid-cols-3 gap-6">
               <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                <Heading as="h4" className="text-lg mb-2 text-white">Базовый сценарий</Heading>
+                <Heading as="h3" className="text-lg mb-2 text-white">Базовый сценарий</Heading>
                 <Body className="text-white/80 text-sm">
                   Установка стандартного антивируса и регулярное обновление ПО (достаточно для повседневной работы)
                 </Body>
               </Card>
               <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                <Heading as="h4" className="text-lg mb-2 text-white">Амбициозный сценарий</Heading>
+                <Heading as="h3" className="text-lg mb-2 text-white">Амбициозный сценарий</Heading>
                 <Body className="text-white/80 text-sm">
                   Покупка дополнительной батареи, водонепроницаемого чехла и двухлетней гарантии (защита от серьезных угроз)
                 </Body>
               </Card>
               <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                <Heading as="h4" className="text-lg mb-2 text-white">Гибридный сценарий</Heading>
+                <Heading as="h3" className="text-lg mb-2 text-white">Гибридный сценарий</Heading>
                 <Body className="text-white/80 text-sm">
                   Программная замена старых компонентов (коммунальные сети) и установка GPS-трекера (ИТС) для эффективности и устойчивости
                 </Body>
