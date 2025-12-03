@@ -179,25 +179,25 @@ export const VisionPage: React.FC = () => {
             </Body>
             <div className="grid md:grid-cols-2 gap-4">
               <Card className="bg-white/80">
-                <Heading as="h4" className="mb-2">Город – лидер по привлекательности</Heading>
+                <Heading as="h3" className="mb-2">Город – лидер по привлекательности</Heading>
                 <Body className="text-sm text-slate-700">
                   Лидер по привлекательности для молодых, город, в котором хочется жить и работать
                 </Body>
               </Card>
               <Card className="bg-white/80">
-                <Heading as="h4" className="mb-2">Технологически оснащенный центр</Heading>
+                <Heading as="h3" className="mb-2">Технологически оснащенный центр</Heading>
                 <Body className="text-sm text-slate-700">
                   Центр экономического роста с высоким уровнем качества жизни и индексом цифровой жизни
                 </Body>
               </Card>
               <Card className="bg-white/80">
-                <Heading as="h4" className="mb-2">Конкурентоспособный образовательный центр</Heading>
+                <Heading as="h3" className="mb-2">Конкурентоспособный образовательный центр</Heading>
                 <Body className="text-sm text-slate-700">
                   Лидирующий в применении современных технологий муниципального управления
                 </Body>
               </Card>
               <Card className="bg-white/80">
-                <Heading as="h4" className="mb-2">Лидер в управлении</Heading>
+                <Heading as="h3" className="mb-2">Лидер в управлении</Heading>
                 <Body className="text-sm text-slate-700">
                   Город, лидирующий в применении современных технологий муниципального управления
                 </Body>
@@ -209,7 +209,7 @@ export const VisionPage: React.FC = () => {
           <Heading as="h3" className="text-2xl mb-6">Шесть стратегических целей (СЦ) до 2035 года</Heading>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {strategicGoals.map((goal, index) => {
-              const colorClasses = {
+              const colorClasses: Record<string, string> = {
                 heritage: "bg-gradient-to-br from-heritage/10 to-heritage/5 border-heritage/30",
                 water: "bg-gradient-to-br from-water/10 to-water/5 border-water/30",
                 digital: "bg-gradient-to-br from-digital/10 to-digital/5 border-digital/30",
@@ -224,9 +224,9 @@ export const VisionPage: React.FC = () => {
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -4 }}
                 >
-                  <Card className={`${colorClasses[goal.color]} h-full`}>
+                  <Card className={`${colorClasses[goal.color] || ""} h-full`}>
                     <div className="text-4xl mb-3">{goal.icon}</div>
-                    <Heading as="h4" className="text-lg mb-2">{goal.title}</Heading>
+                    <Heading as="h3" className="text-lg mb-2">{goal.title}</Heading>
                     <Body className="text-sm text-slate-700">{goal.description}</Body>
                   </Card>
                 </motion.div>
@@ -752,15 +752,15 @@ export const VisionPage: React.FC = () => {
             </div>
             <div className="grid md:grid-cols-3 gap-6">
               <Card className="bg-white/80">
-                <Heading as="h4" className="mb-2">Для жителей</Heading>
+                <Heading as="h3" className="mb-2">Для жителей</Heading>
                 <Body className="text-lg font-semibold text-heritage">«Тверь — твой исток силы»</Body>
               </Card>
               <Card className="bg-white/80">
-                <Heading as="h4" className="mb-2">Для бизнеса/инвесторов</Heading>
+                <Heading as="h3" className="mb-2">Для бизнеса/инвесторов</Heading>
                 <Body className="text-lg font-semibold text-digital">«Первые в деле. Первые в пути»</Body>
               </Card>
               <Card className="bg-white/80">
-                <Heading as="h4" className="mb-2">Дескриптор</Heading>
+                <Heading as="h3" className="mb-2">Дескриптор</Heading>
                 <Body className="text-lg font-semibold text-water">«Исток. Путь. Открытия»</Body>
               </Card>
             </div>
@@ -830,7 +830,7 @@ export const VisionPage: React.FC = () => {
             <Heading as="h3" className="text-2xl mb-6 text-white">Визуальные и архитектурные элементы</Heading>
             <div className="grid md:grid-cols-3 gap-6">
               <div>
-                <Heading as="h4" className="text-lg mb-3 text-white">Цветовая палитра</Heading>
+                <Heading as="h3" className="text-lg mb-3 text-white">Цветовая палитра</Heading>
                 <div className="space-y-2">
                   <div className="flex items-center gap-3">
                     <div className="w-12 h-12 rounded bg-[#8B0000]"></div>
@@ -847,7 +847,7 @@ export const VisionPage: React.FC = () => {
                 </div>
               </div>
               <div>
-                <Heading as="h4" className="text-lg mb-3 text-white">Графический мотив</Heading>
+                <Heading as="h3" className="text-lg mb-3 text-white">Графический мотив</Heading>
                 <Body className="text-white/90 mb-4">
                   Перекрёстный паттерн (трехлучевая звезда), основанный на уникальной регулярной планировке центра Твери
                 </Body>
@@ -856,7 +856,7 @@ export const VisionPage: React.FC = () => {
                 </div>
               </div>
               <div>
-                <Heading as="h4" className="text-lg mb-3 text-white">Дизайн-код</Heading>
+                <Heading as="h3" className="text-lg mb-3 text-white">Дизайн-код</Heading>
                 <Body className="text-white/90">
                   Разработка и реализация Дизайн-кода города Твери является требованием Мастер-плана.
                   Он должен обеспечить избавление от визуального и аудио мусора и реставрацию исторически значимых зданий.
@@ -874,7 +874,7 @@ export const VisionPage: React.FC = () => {
                 className="w-full h-[300px] object-cover"
               />
               <div className="bg-white p-6">
-                <Heading as="h4" className="mb-2">Исток Великой Реки</Heading>
+                <Heading as="h3" className="mb-2">Исток Великой Реки</Heading>
                 <Body className="text-sm text-slate-600">Слияние трех рек: Волга, Тверца, Тьмака</Body>
               </div>
             </div>
@@ -885,7 +885,7 @@ export const VisionPage: React.FC = () => {
                 className="w-full h-[300px] object-cover"
               />
               <div className="bg-white p-6">
-                <Heading as="h4" className="mb-2">Город-перекрёсток</Heading>
+                <Heading as="h3" className="mb-2">Город-перекрёсток</Heading>
                 <Body className="text-sm text-slate-600">Соединение дорог и столиц</Body>
               </div>
             </div>
@@ -896,7 +896,7 @@ export const VisionPage: React.FC = () => {
                 className="w-full h-[300px] object-cover"
               />
               <div className="bg-white p-6">
-                <Heading as="h4" className="mb-2">Культурная аутентичность</Heading>
+                <Heading as="h3" className="mb-2">Культурная аутентичность</Heading>
                 <Body className="text-sm text-slate-600">Историческое наследие и современность</Body>
               </div>
             </div>

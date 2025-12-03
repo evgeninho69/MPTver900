@@ -16,8 +16,8 @@ const defaultConfig: RAGConfig = {
  * В будущем здесь будет реальный запрос к бэкенду с PostgreSQL и векторным поиском
  */
 export const queryRAG = async (
-  request: AIRequest,
-  config: RAGConfig = defaultConfig
+  _request: AIRequest,
+  _config: RAGConfig = defaultConfig
 ): Promise<AIResponse> => {
   // TODO: Реализовать реальный запрос к API
   // const response = await fetch(config.apiUrl, {
@@ -42,7 +42,7 @@ export const queryRAG = async (
 /**
  * Получение истории диалога из базы данных
  */
-export const getChatHistory = async (sessionId: string) => {
+export const getChatHistory = async (_sessionId: string) => {
   // TODO: Реализовать получение истории из PostgreSQL
   return [];
 };

@@ -15,8 +15,8 @@ const defaultConfig: TelegramConfig = {
  * TODO: Реализовать реальный запрос к Telegram Bot API
  */
 export const fetchChannelPosts = async (
-  limit: number = 10,
-  config: TelegramConfig = defaultConfig
+  _limit: number = 10,
+  _config: TelegramConfig = defaultConfig
 ): Promise<TelegramChannelPost[]> => {
   // TODO: Реализовать запрос к Telegram Bot API
   // const response = await fetch(
@@ -32,8 +32,8 @@ export const fetchChannelPosts = async (
 /**
  * Парсинг сообщений Telegram в формат для сайта
  */
-const parseTelegramMessages = (messages: TelegramMessage[]): TelegramChannelPost[] => {
-  return messages.map((msg) => ({
+export const parseTelegramMessages = (messages: TelegramMessage[]): TelegramChannelPost[] => {
+  return messages.map((msg: TelegramMessage) => ({
     id: `telegram-${msg.message_id}`,
     messageId: msg.message_id,
     text: msg.text || msg.caption || "",
@@ -41,14 +41,14 @@ const parseTelegramMessages = (messages: TelegramMessage[]): TelegramChannelPost
     imageUrl: msg.photo?.[0]?.file_id
       ? `https://api.telegram.org/file/bot${import.meta.env.VITE_TELEGRAM_BOT_TOKEN || ""}/${msg.photo[0].file_id}`
       : undefined,
-    link: msg.entities?.find((e) => e.type === "url")?.url,
+    link: msg.entities?.find((e: any) => e.type === "url")?.url,
   }));
 };
 
 /**
  * Подписка на обновления канала через webhook
  */
-export const setupWebhook = async (webhookUrl: string, config: TelegramConfig = defaultConfig) => {
+export const setupWebhook = async (_webhookUrl: string, _config: TelegramConfig = defaultConfig) => {
   // TODO: Реализовать настройку webhook для получения обновлений в реальном времени
   // const response = await fetch(
   //   `${config.apiUrl}/bot${config.botToken}/setWebhook?url=${webhookUrl}`
@@ -59,7 +59,7 @@ export const setupWebhook = async (webhookUrl: string, config: TelegramConfig = 
 /**
  * Получение информации о канале
  */
-export const getChannelInfo = async (config: TelegramConfig = defaultConfig) => {
+export const getChannelInfo = async (_config: TelegramConfig = defaultConfig) => {
   // TODO: Реализовать получение информации о канале
   // const response = await fetch(
   //   `${config.apiUrl}/bot${config.botToken}/getChat?chat_id=${config.channelId}`

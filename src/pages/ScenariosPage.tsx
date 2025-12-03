@@ -16,8 +16,14 @@ const scenarios = [
     subtitle: "Пессимистический",
     color: "heritage",
     investment: "0.5×",
-    description: "Минимум капиталоемкости, точечные улучшения",
+    investmentFull: "~0,5× от инвестиций Стратегии‑2035",
+    description: "Точечные улучшения, ИТС, минимальная капиталоемкость",
     risks: "Низкие, но слабый эффект",
+    focus: "Точечные улучшения, ИТС, минимальная капиталоемкость",
+    transport: "Локальные узлы, без системного перелома модальностей",
+    heritage: "Адресная консервация объектов",
+    ecology: "Поддержание статус‑кво",
+    tourism: "Стабилизация, рост за счет общероссийского тренда",
   },
   {
     id: "base",
@@ -25,18 +31,50 @@ const scenarios = [
     subtitle: "Реалистичный/Основной",
     color: "water",
     investment: "1×",
-    description: "Условная база, соответствующая стратегии",
-    risks: "Средние",
+    investmentFull: "~1×, адаптированный к текущей макросреде",
+    description: "Регулярная регенерация, модернизация сетей, парковка, пилотные набережные",
+    risks: "Средние, управляемые",
+    focus: "Регулярная регенерация, модернизация сетей, парковка, пилотные набережные",
+    transport: "Улучшение ОТ и связности, подготовка к ВСМ",
+    heritage: "Реставрация приоритетного пула, запуск адаптивного использования",
+    ecology: "Локальные проекты на Тьмаке",
+    tourism: "Устойчивый рост, до 3,5–4 млн поездок в область к 2027 году",
   },
   {
     id: "ambitious",
     name: "Амбициозный сценарий",
     subtitle: "Оптимистический",
     color: "digital",
-    investment: "1.8×",
-    description: "Агрессивный рост инвестиций",
-    risks: "Высокие",
+    investment: "1.5–1.8×",
+    investmentFull: "1,5–1,8× с опорой на федеральные, частные и ГЧП‑механизмы",
+    description: "Пешеходный центр, полная связность набережных, крупные якорные проекты",
+    risks: "Высокие, риск недофинансирования и незавершенности",
+    focus: "Пешеходный центр, полная связность набережных, крупные якорные проекты",
+    transport: "Полноценная интегрированная система, опора на эффект ВСМ‑2035+",
+    heritage: "До 70% адаптированных ОКН, сильный бренд исторического центра",
+    ecology: "Системная реабилитация Тьмаки и Лазури, зелёный каркас",
+    tourism: "Туризм как ключевой экономический кластер, рост к 4,5–5+ млн",
   },
+];
+
+// Таймлайн ключевых событий
+const timelineEvents = [
+  { year: "2025", event: "Начало реализации мастер-плана", icon: "🚀" },
+  { year: "2026", event: "Завершение Западного моста", icon: "🌉" },
+  { year: "2028", event: "Запуск ВСМ Москва–Санкт-Петербург", icon: "🚄" },
+  { year: "2030", event: "Ввод новых общественных пространств", icon: "🏛️" },
+  { year: "2035", event: "900-летие Твери, достижение целевых показателей", icon: "🎉" },
+  { year: "2040", event: "ВСМ «Новая Тверь» в полной эксплуатации", icon: "🚇" },
+  { year: "2045", event: "Завершение долгосрочных проектов", icon: "✨" },
+];
+
+// Динамика туристического потока
+const tourismData = [
+  { year: "2023", value: 2.5, label: "Базовый уровень" },
+  { year: "2024", value: 2.8, label: "Рост 12%" },
+  { year: "2025", value: 3.7, label: "Рост 49%", highlight: true },
+  { year: "2027", value: 4.0, label: "Цель базового сценария" },
+  { year: "2035", value: 5.0, label: "Цель амбициозного сценария" },
 ];
 
 export const ScenariosPage: React.FC = () => {
@@ -55,6 +93,7 @@ export const ScenariosPage: React.FC = () => {
             className="w-full h-full object-cover"
           />
         </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60" />
         <div className="relative z-10 max-w-5xl w-full">
           <Button
             variant="ghost"
@@ -70,8 +109,9 @@ export const ScenariosPage: React.FC = () => {
             Сценарии развития города и агломерации
           </Heading>
           <Body className="text-lg text-slate-700 max-w-3xl">
-            Формирование трех сценариев развития, выработка гипотез развития и определение целевого сценария
-            для обеспечения прорывного развития Твери к 900-летию в 2035 году.
+            Три сценария развития Твери и агломерации до 2035 года формируют рамку для выбора целевой траектории,
+            обеспечивающей прорывное развитие к 900‑летию города как <strong>«города, привлекающего таланты»</strong>.
+            Целевым рекомендуется <strong className="text-digital">гибридный сценарий</strong>, сочетающий устойчивость базового и прорывные элементы амбициозного.
           </Body>
         </div>
       </PageSection>
@@ -89,7 +129,7 @@ export const ScenariosPage: React.FC = () => {
             <div>
               <Caption className="text-water mb-2">Раздел I</Caption>
               <Heading as="h2" className="text-3xl">
-                Стратегическая рамка и предпосылки
+                Стратегический контур и исходные условия
               </Heading>
             </div>
           </div>
@@ -98,108 +138,80 @@ export const ScenariosPage: React.FC = () => {
             <Card className="bg-gradient-to-br from-digital/5 to-digital/10 border-digital/30">
               <Heading as="h3" className="mb-4 text-xl">Стратегическое видение</Heading>
               <Body className="text-slate-700 mb-4">
-                Тверь стремится стать <strong className="text-digital">«городом, привлекающим таланты»</strong> и лидером
-                по привлекательности для молодежи, сочетая <strong>сохраненное историческое наследие</strong> с{" "}
-                <strong>передовыми технологиями</strong>.
+                Тверь закрепляет видение <strong className="text-digital">«города, привлекающего таланты»</strong>,
+                опираясь на историческое ядро, рекреационный потенциал Волги и Тьмаки, выгодное положение на оси Москва–Санкт‑Петербург
+                и запуск ВСМ, который сократит время в пути от Москвы до <strong>39 минут</strong>.
               </Body>
               <div className="flex flex-wrap gap-2">
-                <Tag tone="digital">СЦ-2 Пространство</Tag>
-                <Tag tone="water">СЦ-5 Инновации</Tag>
+                <Tag tone="digital">ВСМ 2028</Tag>
+                <Tag tone="water">СЦ-2 Пространство</Tag>
+                <Tag tone="heritage">СЦ-5 Инновации</Tag>
               </div>
             </Card>
 
             <Card className="bg-gradient-to-br from-heritage/5 to-heritage/10 border-heritage/30">
-              <Heading as="h3" className="mb-4 text-xl">Этапность реализации</Heading>
+              <Heading as="h3" className="mb-4 text-xl">Ключевые достижения</Heading>
               <div className="space-y-4">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-8 h-8 rounded-full bg-heritage text-white flex items-center justify-center font-bold text-sm">
-                      I
-                    </div>
-                    <Body className="font-semibold">Этап 2025–2035</Body>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0" />
+                  <div>
+                    <Body className="font-semibold text-slate-900">Рост туристического потока</Body>
+                    <Body className="text-sm text-slate-600">
+                      Увеличение на <strong className="text-heritage">49%</strong> за 10 месяцев 2025 года
+                    </Body>
                   </div>
-                  <Body className="text-sm text-slate-600 ml-10">
-                    Фокус на подготовке, ключевых проектах и «быстрых победах». Цель — достижение показателей к 900-летию.
-                  </Body>
                 </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-8 h-8 rounded-full bg-water text-white flex items-center justify-center font-bold text-sm">
-                      II
-                    </div>
-                    <Body className="font-semibold">Этап 2035–2045</Body>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0" />
+                  <div>
+                    <Body className="font-semibold text-slate-900">Развитие общественных пространств</Body>
+                    <Body className="text-sm text-slate-600">
+                      Реализация программ благоустройства
+                    </Body>
                   </div>
-                  <Body className="text-sm text-slate-600 ml-10">
-                    Реализация долгосрочных решений, включая ВСМ «Новая Тверь», полное формирование транспортной системы.
-                  </Body>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0" />
+                  <div>
+                    <Body className="font-semibold text-slate-900">Спортивная инфраструктура</Body>
+                    <Body className="text-sm text-slate-600">
+                      Повышение обеспеченности спортивными объектами
+                    </Body>
+                  </div>
                 </div>
               </div>
             </Card>
           </div>
 
-          {/* Изображения стратегического видения */}
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
-            <div className="rounded-2xl overflow-hidden shadow-lg group">
-              <img
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=90&auto=format&fit=crop"
-                alt="Историческое наследие"
-                className="w-full h-[250px] object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="bg-white p-4">
-                <Caption className="text-slate-500">Историческое наследие</Caption>
+          {/* Таймлайн 2025-2045 */}
+          <Card className="bg-gradient-to-br from-slate-50 to-white border-slate-200 mb-8">
+            <Heading as="h3" className="text-2xl mb-6">Таймлайн развития 2025–2045</Heading>
+            <div className="relative">
+              {/* Линия таймлайна */}
+              <div className="absolute left-0 right-0 top-12 h-1 bg-gradient-to-r from-heritage via-water to-digital opacity-30" />
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 relative">
+                {timelineEvents.map((event, index) => (
+                  <motion.div
+                    key={event.year}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="relative"
+                  >
+                    <div className="text-center">
+                      <div className="w-24 h-24 mx-auto mb-3 rounded-full bg-white border-4 border-slate-200 flex items-center justify-center text-3xl shadow-lg hover:scale-110 transition-transform">
+                        {event.icon}
+                      </div>
+                      <div className="text-2xl font-bold text-slate-900 mb-1">{event.year}</div>
+                      <Body className="text-xs text-slate-600 leading-tight">{event.event}</Body>
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-lg group">
-              <img
-                src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=90&auto=format&fit=crop"
-                alt="Передовые технологии"
-                className="w-full h-[250px] object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="bg-white p-4">
-                <Caption className="text-slate-500">Передовые технологии</Caption>
-              </div>
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-lg group">
-              <img
-                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=90&auto=format&fit=crop"
-                alt="Привлечение талантов"
-                className="w-full h-[250px] object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="bg-white p-4">
-                <Caption className="text-slate-500">Привлечение талантов</Caption>
-              </div>
-            </div>
-          </div>
-
-          {/* Дополнительные изображения этапности */}
-          <div className="grid md:grid-cols-2 gap-6 mb-8">
-            <div className="rounded-2xl overflow-hidden shadow-xl">
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=90&auto=format&fit=crop"
-                alt="Этап 2025-2035"
-                className="w-full h-[300px] object-cover"
-              />
-              <div className="bg-white p-6">
-                <Heading as="h3" className="mb-2">Этап I: 2025–2035</Heading>
-                <Body className="text-slate-600">
-                  Фокус на подготовке, ключевых проектах и «быстрых победах». Достижение целевых показателей к 900-летию Твери.
-                </Body>
-              </div>
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-xl">
-              <img
-                src="https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1200&q=90&auto=format&fit=crop"
-                alt="Этап 2035-2045"
-                className="w-full h-[300px] object-cover"
-              />
-              <div className="bg-white p-6">
-                <Heading as="h3" className="mb-2">Этап II: 2035–2045</Heading>
-                <Body className="text-slate-600">
-                  Реализация долгосрочных решений, включая ВСМ «Новая Тверь», полное формирование интегрированной транспортной системы.
-                </Body>
-              </div>
-            </div>
-          </div>
+          </Card>
         </motion.div>
       </PageSection>
 
@@ -216,58 +228,102 @@ export const ScenariosPage: React.FC = () => {
             <div>
               <Caption className="text-digital mb-2">Раздел II</Caption>
               <Heading as="h2" className="text-3xl">
-                Сценарный анализ развития
+                Сценарная рамка: три траектории развития
               </Heading>
             </div>
           </div>
 
-          {/* Карточки сценариев */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            {scenarios.map((scenario, index) => {
-              const colorClasses: Record<string, string> = {
-                heritage: "bg-gradient-to-br from-heritage/10 to-heritage/5 border-heritage/30",
-                water: "bg-gradient-to-br from-water/10 to-water/5 border-water/30",
-                digital: "bg-gradient-to-br from-digital/10 to-digital/5 border-digital/30",
-              };
-              const bgColorClasses: Record<string, string> = {
-                heritage: "bg-heritage",
-                water: "bg-water",
-                digital: "bg-digital",
-              };
-              
-              return (
-                <motion.div
-                  key={scenario.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -8 }}
-                >
-                  <Card className={`${colorClasses[scenario.color] || ""} h-full`}>
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className={`w-12 h-12 rounded-full ${bgColorClasses[scenario.color] || ""} flex items-center justify-center text-white font-bold text-xl`}>
-                        {index + 1}
-                      </div>
-                      <div>
-                        <Heading as="h3" className="text-lg">{scenario.name}</Heading>
-                        <Caption className="text-xs">{scenario.subtitle}</Caption>
-                      </div>
-                    </div>
-                    <div className="text-4xl font-bold mb-2" style={{ color: `var(--color-${scenario.color})` }}>
-                      {scenario.investment}
-                    </div>
-                    <Body className="text-sm text-slate-700 mb-4">{scenario.description}</Body>
-                    <div className="pt-4 border-t border-slate-200">
-                      <Body className="text-xs text-slate-600">
-                        <strong>Риски:</strong> {scenario.risks}
-                      </Body>
-                    </div>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
+          {/* Инфографика: Диаграмма-веер трех сценариев */}
+          <Card className="bg-white mb-12 overflow-hidden">
+            <Heading as="h3" className="text-2xl mb-6 px-6 pt-6">Сравнение сценариев</Heading>
+            <div className="p-6">
+              <div className="grid md:grid-cols-3 gap-6">
+                {scenarios.map((scenario, index) => {
+                  const colorClasses: Record<string, string> = {
+                    heritage: "from-heritage/20 to-heritage/5 border-heritage/30",
+                    water: "from-water/20 to-water/5 border-water/30",
+                    digital: "from-digital/20 to-digital/5 border-digital/30",
+                  };
+                  const bgColorClasses: Record<string, string> = {
+                    heritage: "bg-heritage",
+                    water: "bg-water",
+                    digital: "bg-digital",
+                  };
+                  const investmentValues: Record<string, number> = {
+                    heritage: 0.5,
+                    water: 1.0,
+                    digital: 1.65, // среднее между 1.5 и 1.8
+                  };
+                  
+                  return (
+                    <motion.div
+                      key={scenario.id}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="relative"
+                    >
+                      <Card className={`bg-gradient-to-br ${colorClasses[scenario.color] || ""} h-full`}>
+                        {/* Индикатор инвестиций */}
+                        <div className="mb-6">
+                          <div className="flex items-baseline gap-2 mb-2">
+                            <div className={`text-5xl font-bold ${bgColorClasses[scenario.color] || ""} text-white px-4 py-2 rounded-lg`}>
+                              {scenario.investment}
+                            </div>
+                            <Body className="text-xs text-slate-600">инвестиций</Body>
+                          </div>
+                          <div className="h-3 bg-slate-200 rounded-full overflow-hidden">
+                            <motion.div
+                              initial={{ width: 0 }}
+                              whileInView={{ width: `${(investmentValues[scenario.color] || 1) * 50}%` }}
+                              viewport={{ once: true }}
+                              transition={{ duration: 1, delay: index * 0.2 }}
+                              className={`h-full ${bgColorClasses[scenario.color] || ""} rounded-full`}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="mb-4">
+                          <Heading as="h3" className="text-xl mb-1">{scenario.name}</Heading>
+                          <Caption className="text-xs">{scenario.subtitle}</Caption>
+                        </div>
+
+                        <div className="space-y-3 text-sm">
+                          <div>
+                            <Body className="font-semibold text-slate-900 mb-1">Фокус:</Body>
+                            <Body className="text-slate-700 text-xs">{scenario.focus}</Body>
+                          </div>
+                          <div>
+                            <Body className="font-semibold text-slate-900 mb-1">Транспорт:</Body>
+                            <Body className="text-slate-700 text-xs">{scenario.transport}</Body>
+                          </div>
+                          <div>
+                            <Body className="font-semibold text-slate-900 mb-1">Наследие:</Body>
+                            <Body className="text-slate-700 text-xs">{scenario.heritage}</Body>
+                          </div>
+                          <div>
+                            <Body className="font-semibold text-slate-900 mb-1">Экология:</Body>
+                            <Body className="text-slate-700 text-xs">{scenario.ecology}</Body>
+                          </div>
+                          <div>
+                            <Body className="font-semibold text-slate-900 mb-1">Туризм:</Body>
+                            <Body className="text-slate-700 text-xs">{scenario.tourism}</Body>
+                          </div>
+                        </div>
+
+                        <div className="mt-6 pt-4 border-t border-slate-200">
+                          <Body className="text-xs text-slate-600">
+                            <strong>Риски:</strong> {scenario.risks}
+                          </Body>
+                        </div>
+                      </Card>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+          </Card>
 
           {/* Детальная таблица сравнения */}
           <Card className="overflow-x-auto mb-8">
@@ -282,116 +338,166 @@ export const ScenariosPage: React.FC = () => {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="py-4 px-4 font-semibold">Инвестиции (10 лет)</td>
-                  <td className="py-4 px-4">0.5× (Минимум)</td>
-                  <td className="py-4 px-4">1× (База)</td>
-                  <td className="py-4 px-4">1.8× (Агрессивный рост)</td>
+                  <td className="py-4 px-4 font-semibold">Инвестиции 2025–2035</td>
+                  <td className="py-4 px-4">~0,5× от инвестиций Стратегии‑2035</td>
+                  <td className="py-4 px-4">~1×, адаптированный к текущей макросреде</td>
+                  <td className="py-4 px-4">1,5–1,8× с опорой на федеральные, частные и ГЧП‑механизмы</td>
                 </tr>
                 <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="py-4 px-4 font-semibold">Фокус развития</td>
-                  <td className="py-4 px-4">Точечные улучшения, ИТС, минимум капиталоемкости</td>
-                  <td className="py-4 px-4">Регулярная регенерация, ИТС, парковка, пилотные проекты</td>
-                  <td className="py-4 px-4"><strong>Пешеходный центр, полная связность набережных, крупные якоря</strong></td>
+                  <td className="py-4 px-4 font-semibold">Фокус</td>
+                  <td className="py-4 px-4">Точечные улучшения, ИТС, минимальная капиталоемкость</td>
+                  <td className="py-4 px-4">Регулярная регенерация, модернизация сетей, парковка, пилотные набережные</td>
+                  <td className="py-4 px-4"><strong>Пешеходный центр, полная связность набережных, крупные якорные проекты</strong></td>
                 </tr>
                 <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="py-4 px-4 font-semibold">Экология рек</td>
-                  <td className="py-4 px-4">Поддержание статуса-кво</td>
-                  <td className="py-4 px-4">Локальные улучшения Тьмаки</td>
-                  <td className="py-4 px-4"><strong>Системная реабилитация Тьмаки и Лазури</strong></td>
+                  <td className="py-4 px-4 font-semibold">Транспорт</td>
+                  <td className="py-4 px-4">Локальные узлы, без системного перелома модальностей</td>
+                  <td className="py-4 px-4">Улучшение ОТ и связности, подготовка к ВСМ</td>
+                  <td className="py-4 px-4"><strong>Полноценная интегрированная система, опора на эффект ВСМ‑2035+</strong></td>
                 </tr>
                 <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="py-4 px-4 font-semibold">Мобильность</td>
-                  <td className="py-4 px-4">+5 п.п. доли ОТ/Пеш/Вело</td>
-                  <td className="py-4 px-4">+10 п.п. доли, +15% скорости</td>
-                  <td className="py-4 px-4"><strong>+18 п.п. доли, +25% скорости</strong></td>
+                  <td className="py-4 px-4 font-semibold">Наследие и идентичность</td>
+                  <td className="py-4 px-4">Адресная консервация объектов</td>
+                  <td className="py-4 px-4">Реставрация приоритетного пула, запуск адаптивного использования</td>
+                  <td className="py-4 px-4"><strong>До 70% адаптированных ОКН, сильный бренд исторического центра</strong></td>
                 </tr>
                 <tr className="hover:bg-slate-50 transition-colors">
-                  <td className="py-4 px-4 font-semibold">Историческое наследие</td>
-                  <td className="py-4 px-4">Адресная консервация</td>
-                  <td className="py-4 px-4">Реставрация приоритетного пула</td>
-                  <td className="py-4 px-4"><strong>70% адаптированных ОКН к 2035 г.</strong></td>
+                  <td className="py-4 px-4 font-semibold">Экология</td>
+                  <td className="py-4 px-4">Поддержание статус‑кво</td>
+                  <td className="py-4 px-4">Локальные проекты на Тьмаке</td>
+                  <td className="py-4 px-4"><strong>Системная реабилитация Тьмаки и Лазури, зелёный каркас</strong></td>
+                </tr>
+                <tr className="hover:bg-slate-50 transition-colors">
+                  <td className="py-4 px-4 font-semibold">Туризм</td>
+                  <td className="py-4 px-4">Стабилизация, рост за счет общероссийского тренда</td>
+                  <td className="py-4 px-4">Устойчивый рост, до 3,5–4 млн поездок в область к 2027 году</td>
+                  <td className="py-4 px-4"><strong>Туризм как ключевой экономический кластер, рост к 4,5–5+ млн</strong></td>
+                </tr>
+                <tr className="hover:bg-slate-50 transition-colors">
+                  <td className="py-4 px-4 font-semibold">Риски</td>
+                  <td className="py-4 px-4">Низкие, но слабый эффект</td>
+                  <td className="py-4 px-4">Средние, управляемые</td>
+                  <td className="py-4 px-4">Высокие, риск недофинансирования и незавершенности</td>
                 </tr>
               </tbody>
             </table>
           </Card>
 
-          {/* Изображения сценариев */}
-          <div className="grid md:grid-cols-3 gap-6 mb-8">
-            <div className="rounded-2xl overflow-hidden shadow-xl">
-              <img
-                src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=90&auto=format&fit=crop"
-                alt="Ограниченный сценарий"
-                className="w-full h-[300px] object-cover"
-              />
-              <div className="bg-white p-6">
-                <Caption className="text-heritage mb-2">Ограниченный сценарий</Caption>
-                <Body className="text-sm">Точечные улучшения, минимальные инвестиции</Body>
-              </div>
+          {/* Диаграмма динамики туристического потока */}
+          <Card className="bg-white mb-8">
+            <Heading as="h3" className="text-2xl mb-6">Динамика туристического потока</Heading>
+            <Body className="text-slate-600 mb-6">
+              Тверская область входит в число лидеров по росту туристического потока. 
+              Увеличение на <strong className="text-digital">49%</strong> за 10 месяцев 2025 года превращает туризм 
+              в один из ключевых драйверов городской экономики.
+            </Body>
+            <div className="relative h-64 flex items-end justify-between gap-2">
+              {tourismData.map((data, index) => {
+                const maxValue = 5.0;
+                const height = (data.value / maxValue) * 100;
+                return (
+                  <motion.div
+                    key={data.year}
+                    initial={{ height: 0 }}
+                    whileInView={{ height: `${height}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, delay: index * 0.1 }}
+                    className={`flex-1 flex flex-col items-center ${
+                      data.highlight ? "bg-gradient-to-t from-digital to-water" : "bg-gradient-to-t from-slate-300 to-slate-400"
+                    } rounded-t-lg relative group`}
+                  >
+                    <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 text-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="bg-slate-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+                        {data.value} млн
+                      </div>
+                    </div>
+                    <div className="mt-auto mb-2 text-xs font-semibold text-white">
+                      {data.value} млн
+                    </div>
+                    <div className="text-xs text-slate-600 mb-1 font-semibold">{data.year}</div>
+                    <div className="text-xs text-slate-500 text-center px-1">{data.label}</div>
+                  </motion.div>
+                );
+              })}
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-xl">
-              <img
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=90&auto=format&fit=crop"
-                alt="Базовый сценарий"
-                className="w-full h-[300px] object-cover"
-              />
-              <div className="bg-white p-6">
-                <Caption className="text-water mb-2">Базовый сценарий</Caption>
-                <Body className="text-sm">Регулярная регенерация, умеренные инвестиции</Body>
-              </div>
-            </div>
-            <div className="rounded-2xl overflow-hidden shadow-xl">
-              <img
-                src="https://images.unsplash.com/photo-1514565131-fce0801e5785?w=1200&q=90&auto=format&fit=crop"
-                alt="Амбициозный сценарий"
-                className="w-full h-[300px] object-cover"
-              />
-              <div className="bg-white p-6">
-                <Caption className="text-digital mb-2">Амбициозный сценарий</Caption>
-                <Body className="text-sm">Пешеходный центр, полная связность, крупные проекты</Body>
-              </div>
-            </div>
-          </div>
+          </Card>
 
-          {/* Целевой сценарий */}
-          <Card className="bg-gradient-to-br from-digital/20 via-water/10 to-heritage/20 border-2 border-digital/30">
+          {/* Целевой гибридный сценарий */}
+          <Card className="bg-gradient-to-br from-digital/20 via-water/10 to-heritage/20 border-2 border-digital/30 mb-8">
             <div className="flex items-center gap-4 mb-6">
               <div className="w-16 h-16 rounded-full bg-gradient-to-br from-digital via-water to-heritage flex items-center justify-center text-white text-2xl font-bold shadow-lg">
                 ⭐
               </div>
               <div>
                 <Heading as="h3" className="text-2xl mb-2">Целевой сценарий: Гибридный</Heading>
-                <Body className="text-slate-600">Базовый + Амбициозный</Body>
+                <Body className="text-slate-600">Базовый + прорывные элементы амбициозного</Body>
               </div>
             </div>
             <Body className="text-lg text-slate-700 mb-6">
-              Для достижения главной стратегической цели – <strong>обеспечение прорывного развития экономики
-              и повышение комфортности жизни</strong> – рекомендуется выбрать <strong className="text-digital">гибридный сценарий</strong>,
-              который сочетает стабильность базового варианта с наиболее критичными и прорывными элементами амбициозного.
+              С учетом текущих достижений реализации Стратегии‑2035, подтвержденного роста туристического потока,
+              запуска ВСМ и масштабного строительства Западного моста целевым для мастер‑плана предлагается{" "}
+              <strong className="text-digital">гибридный сценарий</strong>, объединяющий основу базового и критически важные элементы амбициозного.
             </Body>
-            <div className="grid md:grid-cols-3 gap-4">
+            
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
               <Card className="bg-white/80">
-                <Heading as="h4" className="text-lg mb-2">1. Прорывной эффект</Heading>
+                <div className="text-3xl mb-2">🔧</div>
+                <Heading as="h3" className="text-lg mb-2">Модернизация сетей</Heading>
                 <Body className="text-sm text-slate-700">
-                  Резкое снижение износа коммунальных сетей с 84,1% до 20% к 2035 году требует агрессивной модернизации
+                  Износ тепловых сетей с 84,1% до 20–25% к 2035 году
                 </Body>
               </Card>
               <Card className="bg-white/80">
-                <Heading as="h4" className="text-lg mb-2">2. Быстрые победы</Heading>
+                <div className="text-3xl mb-2">🌉</div>
+                <Heading as="h3" className="text-lg mb-2">Западный мост</Heading>
                 <Body className="text-sm text-slate-700">
-                  Пешеходизация Старого Волжского моста, редизайн Бульвара Радищева, пилотные участки набережных
+                  Новая транспортная хора и связка с трассой М‑11
                 </Body>
               </Card>
               <Card className="bg-white/80">
-                <Heading as="h4" className="text-lg mb-2">3. Гибкость</Heading>
+                <div className="text-3xl mb-2">🌊</div>
+                <Heading as="h3" className="text-lg mb-2">Набережные</Heading>
                 <Body className="text-sm text-slate-700">
-                  Защита критически важных приоритетов даже при ограниченном финансировании, готовность к ускорению
+                  Системная переработка набережных Волги и Тьмаки
                 </Body>
               </Card>
+              <Card className="bg-white/80">
+                <div className="text-3xl mb-2">🎯</div>
+                <Heading as="h3" className="text-lg mb-2">Туризм</Heading>
+                <Body className="text-sm text-slate-700">
+                  Поддержка туристического рывка через инфраструктуру и события
+                </Body>
+              </Card>
+            </div>
+
+            {/* Корректировки сценария */}
+            <div className="bg-white/60 rounded-lg p-6">
+              <Heading as="h3" className="text-xl mb-4">Корректировки исходного сценария</Heading>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div>
+                  <Body className="font-semibold text-slate-900 mb-2">Демография</Body>
+                  <Body className="text-sm text-slate-700">
+                    Переход к качественным показателям (удержание талантов) при коридоре 450–460 тыс. жителей к 2035 году
+                  </Body>
+                </div>
+                <div>
+                  <Body className="font-semibold text-slate-900 mb-2">Инвестиции</Body>
+                  <Body className="text-sm text-slate-700">
+                    Адаптация с учетом санкций и удорожания строительства, опора на федеральное финансирование и ГЧП
+                  </Body>
+                </div>
+                <div>
+                  <Body className="font-semibold text-slate-900 mb-2">Экология</Body>
+                  <Body className="text-sm text-slate-700">
+                    Экологические проекты переводятся в перечень обязательных для выполнения к 2035 году
+                  </Body>
+                </div>
+              </div>
             </div>
           </Card>
 
           {/* Место для картографического материала сценариев */}
-          <Card className="bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-dashed border-slate-300 min-h-[500px] flex items-center justify-center mt-8">
+          <Card className="bg-gradient-to-br from-slate-50 to-slate-100 border-2 border-dashed border-slate-300 min-h-[500px] flex items-center justify-center">
             <div className="text-center">
               <svg className="w-24 h-24 mx-auto mb-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
@@ -420,15 +526,45 @@ export const ScenariosPage: React.FC = () => {
             <div>
               <Caption className="text-heritage mb-2">Раздел III</Caption>
               <Heading as="h2" className="text-3xl">
-                Повышение пространственной жизнестойкости
+                Роль жизнестойкости и пространственной устойчивости
               </Heading>
             </div>
           </div>
 
           <Body className="text-lg text-slate-700 mb-8 max-w-4xl">
-            Пространственная жизнестойкость (резилентность) — это способность городских систем, сообществ и инфраструктуры{" "}
-            <strong>преодолевать угрозы, адаптироваться и восстанавливаться</strong>.
+            Во всех трех сценариях уделяется внимание пространственной жизнестойкости: способности городской системы
+            адаптироваться и восстанавливаться под воздействием климатических, экономических и инфраструктурных вызовов.
+            Гибридный сценарий усиливает этот блок через интеграцию климатически устойчивого проектирования.
           </Body>
+
+          {/* Аналогия резилентности */}
+          <Card className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white mb-8">
+            <Heading as="h3" className="text-2xl mb-4 text-white">Аналогия: Тверь как «город‑смартфон нового поколения»</Heading>
+            <Body className="text-white/90 text-lg leading-relaxed mb-6">
+              Пространственная жизнестойкость города подобна тому, как современный смартфон защищен от сбоев:
+            </Body>
+            <div className="grid md:grid-cols-3 gap-6">
+              <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+                <Heading as="h3" className="text-lg mb-2 text-white">Базовый сценарий</Heading>
+                <Body className="text-white/80 text-sm">
+                  «Антивирус и регулярные обновления» — поддерживающие меры и модернизация
+                </Body>
+              </Card>
+              <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+                <Heading as="h3" className="text-lg mb-2 text-white">Амбициозный сценарий</Heading>
+                <Body className="text-white/80 text-sm">
+                  «Расширенный комплект защиты и аксессуаров» — крупные якорные проекты и расширенная инфраструктура
+                </Body>
+              </Card>
+              <Card className="bg-white/10 backdrop-blur-sm border-white/20">
+                <Heading as="h3" className="text-lg mb-2 text-white">Гибридный сценарий</Heading>
+                <Body className="text-white/80 text-sm">
+                  Умное сочетание программной и аппаратной модернизации, включая замену устаревших компонентов (коммунальные сети) 
+                  и внедрение «умных» сервисов управления (ИТС)
+                </Body>
+              </Card>
+            </div>
+          </Card>
 
           {/* Климатическая устойчивость */}
           <div className="mb-12">
@@ -442,7 +578,7 @@ export const ScenariosPage: React.FC = () => {
                   className="w-full h-[300px] object-cover"
                 />
                 <div className="bg-white p-6">
-                  <Heading as="h4" className="mb-2">Водно-зелёный каркас</Heading>
+                  <Heading as="h3" className="mb-2">Водно-зелёный каркас</Heading>
                   <Body className="text-sm text-slate-600">
                     Создание единого непрерывного каркаса зеленых насаждений общего пользования
                   </Body>
@@ -455,33 +591,12 @@ export const ScenariosPage: React.FC = () => {
                   className="w-full h-[300px] object-cover"
                 />
                 <div className="bg-white p-6">
-                  <Heading as="h4" className="mb-2">Реабилитация рек</Heading>
+                  <Heading as="h3" className="mb-2">Реабилитация рек</Heading>
                   <Body className="text-sm text-slate-600">
-                    Регулирование стока и дноуглубление русел малых рек Тьмаки и Лазури
+                    Системная реабилитация малых рек Тьмаки и Лазури, формирование связного водно‑зелёного каркаса
                   </Body>
                 </div>
               </div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card>
-                <Heading as="h4" className="mb-3 text-lg">Рекультивация</Heading>
-                <Body className="text-sm text-slate-700">
-                  Рекультивация нарушенных ландшафтов для повышения экологической устойчивости
-                </Body>
-              </Card>
-              <Card>
-                <Heading as="h4" className="mb-3 text-lg">Акустический комфорт</Heading>
-                <Body className="text-sm text-slate-700">
-                  Ликвидация зон акустического дискомфорта от аэродрома «Мигалово»
-                </Body>
-              </Card>
-              <Card>
-                <Heading as="h4" className="mb-3 text-lg">Вынос производств</Heading>
-                <Body className="text-sm text-slate-700">
-                  Вынос экологически опасных производств из жилой застройки и прибрежных зон
-                </Body>
-              </Card>
             </div>
           </div>
 
@@ -493,47 +608,14 @@ export const ScenariosPage: React.FC = () => {
               <Card className="bg-gradient-to-br from-red-50 to-red-100 border-red-200">
                 <div className="text-5xl font-bold text-red-600 mb-2">84.1%</div>
                 <Body className="text-slate-700 mb-4">Текущий износ тепловых сетей</Body>
-                <div className="text-3xl font-bold text-green-600">→ 20%</div>
-                <Body className="text-slate-700">Целевой показатель к 2035 году</Body>
+                <div className="text-3xl font-bold text-green-600">→ 20–25%</div>
+                <Body className="text-slate-700">Целевой показатель к 2035 году (гибридный сценарий)</Body>
               </Card>
               <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
                 <div className="text-5xl font-bold text-blue-600 mb-2">100%</div>
                 <Body className="text-slate-700 mb-4">Покрытие интеллектуальными светофорами</Body>
                 <Body className="text-slate-700">К 2035 году</Body>
               </Card>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="rounded-2xl overflow-hidden shadow-lg">
-                <img
-                  src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=90&auto=format&fit=crop"
-                  alt="Умный город"
-                  className="w-full h-[200px] object-cover"
-                />
-                <div className="bg-white p-4">
-                  <Caption className="text-slate-500">ИТС и умные технологии</Caption>
-                </div>
-              </div>
-              <div className="rounded-2xl overflow-hidden shadow-lg">
-                <img
-                  src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=90&auto=format&fit=crop"
-                  alt="Инженерные сети"
-                  className="w-full h-[200px] object-cover"
-                />
-                <div className="bg-white p-4">
-                  <Caption className="text-slate-500">Модернизация сетей</Caption>
-                </div>
-              </div>
-              <div className="rounded-2xl overflow-hidden shadow-lg">
-                <img
-                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=90&auto=format&fit=crop"
-                  alt="Обращение с отходами"
-                  className="w-full h-[200px] object-cover"
-                />
-                <div className="bg-white p-4">
-                  <Caption className="text-slate-500">МКОО</Caption>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -543,7 +625,7 @@ export const ScenariosPage: React.FC = () => {
             
             <div className="grid md:grid-cols-2 gap-6 mb-8">
               <Card>
-                <Heading as="h4" className="mb-4 text-lg">Обход транзита</Heading>
+                <Heading as="h3" className="mb-4 text-lg">Обход транзита</Heading>
                 <ul className="space-y-2 text-slate-700">
                   <li className="flex items-start gap-2">
                     <span className="text-digital mt-1">•</span>
@@ -556,7 +638,7 @@ export const ScenariosPage: React.FC = () => {
                 </ul>
               </Card>
               <Card>
-                <Heading as="h4" className="mb-4 text-lg">Усиление связности</Heading>
+                <Heading as="h3" className="mb-4 text-lg">Усиление связности</Heading>
                 <ul className="space-y-2 text-slate-700">
                   <li className="flex items-start gap-2">
                     <span className="text-water mt-1">•</span>
@@ -566,38 +648,12 @@ export const ScenariosPage: React.FC = () => {
                     <span className="text-water mt-1">•</span>
                     <span>Создание <strong>Транспортно-пересадочных узлов (ТПУ)</strong></span>
                   </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-water mt-1">•</span>
+                    <span>Интеграция с <strong>ВСМ «Новая Тверь»</strong> (2028)</span>
+                  </li>
                 </ul>
               </Card>
-            </div>
-
-            {/* Изображения транспортной связности */}
-            <div className="grid md:grid-cols-2 gap-6 mb-8">
-              <div className="rounded-2xl overflow-hidden shadow-lg">
-                <img
-                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=90&auto=format&fit=crop"
-                  alt="Транспортная инфраструктура"
-                  className="w-full h-[300px] object-cover"
-                />
-                <div className="bg-white p-6">
-                  <Heading as="h4" className="mb-2">Полицентрическое развитие</Heading>
-                  <Body className="text-sm text-slate-600">
-                    Создание новых центров активности: «Тверь-Экспо» в Заволжье, «Тверь-Сити» в Южном районе
-                  </Body>
-                </div>
-              </div>
-              <div className="rounded-2xl overflow-hidden shadow-lg">
-                <img
-                  src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1200&q=90&auto=format&fit=crop"
-                  alt="Мультимодальность"
-                  className="w-full h-[300px] object-cover"
-                />
-                <div className="bg-white p-6">
-                  <Heading as="h4" className="mb-2">Мультимодальность</Heading>
-                  <Body className="text-sm text-slate-600">
-                    ТПУ «Тверь-Центр» и будущая станция ВСМ «Новая Тверь» обеспечат свободное использование нескольких видов транспорта
-                  </Body>
-                </div>
-              </div>
             </div>
 
             {/* Место для карты транспортной связности */}
@@ -607,42 +663,14 @@ export const ScenariosPage: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
                 </svg>
                 <Heading as="h3" className="text-xl text-slate-600 mb-2">
-                  Карта транспортной связности
+                  Карта транспортной связности и ВСМ
                 </Heading>
                 <Body className="text-slate-500">
-                  Здесь будет размещена карта с обходными трассами, путепроводами и ТПУ
+                  Здесь будет размещена карта с обходными трассами, путепроводами, ТПУ и трассой ВСМ со станцией «Новая Тверь»
                 </Body>
               </div>
             </Card>
           </div>
-
-          {/* Аналогия резилентности */}
-          <Card className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
-            <Heading as="h3" className="text-2xl mb-4 text-white">Аналогия для понимания резилентности</Heading>
-            <Body className="text-white/90 text-lg leading-relaxed mb-6">
-              Пространственная жизнестойкость города подобна тому, как современный смартфон защищен от сбоев:
-            </Body>
-            <div className="grid md:grid-cols-3 gap-6">
-              <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                <Heading as="h4" className="text-lg mb-2 text-white">Базовый сценарий</Heading>
-                <Body className="text-white/80 text-sm">
-                  Установка стандартного антивируса и регулярное обновление ПО (достаточно для повседневной работы)
-                </Body>
-              </Card>
-              <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                <Heading as="h4" className="text-lg mb-2 text-white">Амбициозный сценарий</Heading>
-                <Body className="text-white/80 text-sm">
-                  Покупка дополнительной батареи, водонепроницаемого чехла и двухлетней гарантии (защита от серьезных угроз)
-                </Body>
-              </Card>
-              <Card className="bg-white/10 backdrop-blur-sm border-white/20">
-                <Heading as="h4" className="text-lg mb-2 text-white">Гибридный сценарий</Heading>
-                <Body className="text-white/80 text-sm">
-                  Программная замена старых компонентов (коммунальные сети) и установка GPS-трекера (ИТС) для эффективности и устойчивости
-                </Body>
-              </Card>
-            </div>
-          </Card>
         </motion.div>
       </PageSection>
     </div>
@@ -650,4 +678,3 @@ export const ScenariosPage: React.FC = () => {
 };
 
 export default ScenariosPage;
-
